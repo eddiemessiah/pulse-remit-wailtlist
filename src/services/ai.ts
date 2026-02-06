@@ -34,7 +34,11 @@ export const parseRemittanceRequest = async (prompt: string): Promise<AIPlanning
                         name: { type: SchemaType.STRING, description: "A friendly name for the agent" },
                         amount: { type: SchemaType.NUMBER },
                         recipient: { type: SchemaType.STRING },
-                        frequency: { type: SchemaType.STRING, enum: ["once", "daily", "weekly", "monthly"] },
+                        frequency: {
+                            type: SchemaType.STRING,
+                            enum: ["once", "daily", "weekly", "monthly"],
+                            format: "enum"
+                        },
                         sourceChain: { type: SchemaType.STRING },
                         destChain: { type: SchemaType.STRING },
                         actionRequired: { type: SchemaType.STRING, description: "Brief summary of what will happen" }
