@@ -20,7 +20,7 @@ import {
 
 const config = getDefaultConfig({
     appName: 'PulseRemit',
-    projectId: 'YOUR_PROJECT_ID', // Replaced with a placeholder
+    projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '044601f65214828129033324c43a05c7', // Fallback or env
     chains: [mainnet, polygon, optimism, base],
     ssr: true,
 })
