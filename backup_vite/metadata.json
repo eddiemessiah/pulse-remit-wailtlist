@@ -1,0 +1,5 @@
+{
+  "name": "Pulse Remit",
+  "description": "An AI-powered agentic remittance hub for emerging markets, integrating Circle, LI.FI, and ENS for seamless, automated cross-border transfers.",
+  "requestFramePermissions": []
+}
