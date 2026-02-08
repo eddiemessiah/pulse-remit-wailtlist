@@ -16,8 +16,9 @@ import {
     X
 } from 'lucide-react'
 import { AgentCard } from '@/components/shared/AgentCard'
-import { RemittanceAgent, AgentStatus, ChainType } from '@/types'
+import { RemittanceAgent, AgentStatus, ChainType, AIPlanningResponse } from '@/types'
 import { cn } from '@/lib/utils'
+import { ChatInterface } from '@/components/shared/ChatInterface'
 
 const initialAgents: RemittanceAgent[] = [
     {
@@ -76,6 +77,7 @@ export default function AgentsPage() {
     const [view, setView] = useState<'grid' | 'list'>('grid')
     const [searchQuery, setSearchQuery] = useState('')
     const [statusFilter, setStatusFilter] = useState<'all' | AgentStatus>('all')
+    const [isDeployModalOpen, setIsDeployModalOpen] = useState(false)
 
     const filteredAgents = useMemo(() => {
         return agents.filter(agent => {
@@ -92,8 +94,26 @@ export default function AgentsPage() {
         ))
     }
 
+    const handleAgentCreated = (plan: AIPlanningResponse) => {
+        const newAgent: RemittanceAgent = {
+            id: Date.now().toString(),
+            name: plan.recipient + ' Agent',
+            recipientEns: plan.recipient,
+            amount: plan.amount,
+            currency: plan.token || 'USDC',
+            frequency: plan.frequency as RemittanceAgent['frequency'],
+            sourceChain: plan.sourceChain as ChainType,
+            destChain: plan.destChain as ChainType,
+            status: AgentStatus.ACTIVE,
+            hedgingEnabled: false,
+            nextRun: new Date().toISOString().split('T')[0]
+        }
+        setAgents(prev => [newAgent, ...prev])
+        setTimeout(() => setIsDeployModalOpen(false), 2000) // Keep open briefly to show success state
+    }
+
     return (
-        <div className="space-y-8 max-w-[1400px] mx-auto pb-20 px-4 md:px-0">
+        <div className="space-y-8 max-w-[1400px] mx-auto pb-20 px-4 md:px-0 relative">
             {/* Header Section */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div className="space-y-2">
@@ -101,7 +121,7 @@ export default function AgentsPage() {
                     <div className="flex items-center gap-3">
                         <p className="text-gray-500">Your autonomous financial representatives.</p>
                         <div className="h-4 w-[1px] bg-white/10 hidden md:block" />
-                        <span className="text-xs font-bold text-[#00FF88] uppercase tracking-widest bg-[#00FF88]/10 px-2 py-0.5 rounded-full">
+                        <span className="text-xs font-bold text-[#CAFF33] uppercase tracking-widest bg-[#CAFF33]/10 px-2 py-0.5 rounded-full">
                             {agents.filter(a => a.status === AgentStatus.ACTIVE).length} / {agents.length} Online
                         </span>
                     </div>
@@ -128,7 +148,10 @@ export default function AgentsPage() {
                             <List className="w-4 h-4" />
                         </button>
                     </div>
-                    <button className="flex-1 md:flex-none px-6 py-3.5 bg-[#00FF88] text-black font-extrabold rounded-2xl flex items-center justify-center gap-2 hover:bg-[#00D16F] transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(0,255,136,0.2)]">
+                    <button
+                        onClick={() => setIsDeployModalOpen(true)}
+                        className="flex-1 md:flex-none px-6 py-3.5 bg-[#CAFF33] text-black font-extrabold rounded-2xl flex items-center justify-center gap-2 hover:bg-[#b8e62e] transition-all transform hover:scale-[1.02] shadow-[0_0_30px_rgba(202,255,51,0.2)]"
+                    >
                         <Plus className="w-5 h-5" />
                         Deploy New Agent
                     </button>
@@ -138,13 +161,13 @@ export default function AgentsPage() {
             {/* Filters Section */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="md:col-span-2 relative group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-[#00FF88] transition-colors" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-[#CAFF33] transition-colors" />
                     <input
                         type="text"
                         placeholder="Search by name or ENS..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-white/[0.03] border border-white/5 rounded-2xl py-3.5 px-12 text-sm focus:outline-none focus:border-[#00FF88]/50 transition-all focus:bg-white/[0.06]"
+                        className="w-full bg-white/[0.03] border border-white/5 rounded-2xl py-3.5 px-12 text-sm focus:outline-none focus:border-[#CAFF33]/50 transition-all focus:bg-white/[0.06]"
                     />
                 </div>
 
@@ -205,9 +228,10 @@ export default function AgentsPage() {
                     {/* Quick Deploy Placeholder */}
                     <motion.button
                         layout
-                        className="pulse-card h-full min-h-[300px] border-2 border-dashed border-white/10 flex flex-col items-center justify-center gap-4 hover:border-[#00FF88]/30 hover:bg-[#00FF88]/5 transition-all group lg:aspect-square"
+                        onClick={() => setIsDeployModalOpen(true)}
+                        className="pulse-card h-full min-h-[300px] border-2 border-dashed border-white/10 flex flex-col items-center justify-center gap-4 hover:border-[#CAFF33]/30 hover:bg-[#CAFF33]/5 transition-all group lg:aspect-square"
                     >
-                        <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform group-hover:bg-[#00FF88]/20 group-hover:text-[#00FF88]">
+                        <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform group-hover:bg-[#CAFF33]/20 group-hover:text-[#CAFF33]">
                             <Plus className="w-8 h-8" />
                         </div>
                         <div className="text-center px-8">
@@ -290,12 +314,55 @@ export default function AgentsPage() {
                     <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">No agents found matching your query</p>
                     <button
                         onClick={() => { setSearchQuery(''); setStatusFilter('all'); }}
-                        className="text-[#00FF88] text-sm font-bold hover:underline"
+                        className="text-[#CAFF33] text-sm font-bold hover:underline"
                     >
                         Clear Filters
                     </button>
                 </div>
             )}
+
+            {/* Deploy Modal */}
+            <AnimatePresence>
+                {isDeployModalOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsDeployModalOpen(false)}
+                            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100]"
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            className="fixed inset-x-4 top-[10%] bottom-[10%] md:inset-x-auto md:w-[600px] md:left-1/2 md:-translate-x-1/2 bg-[#050505] border border-white/10 rounded-3xl overflow-hidden z-[101] flex flex-col shadow-2xl"
+                        >
+                            <div className="flex items-center justify-between p-6 border-b border-white/5 bg-[#0A0A0A]">
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 rounded-xl bg-[#CAFF33]/10 text-[#CAFF33]">
+                                        <Bot className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-lg">Deploy New Agent</h3>
+                                        <p className="text-xs text-gray-500">Configure your automated flow</p>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => setIsDeployModalOpen(false)}
+                                    className="p-2 hover:bg-white/5 rounded-xl transition-colors"
+                                >
+                                    <X className="w-5 h-5 text-gray-500" />
+                                </button>
+                            </div>
+
+                            <div className="flex-1 overflow-hidden">
+                                <ChatInterface onAgentCreated={handleAgentCreated} />
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

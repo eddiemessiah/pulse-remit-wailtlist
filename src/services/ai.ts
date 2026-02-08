@@ -1,58 +1,83 @@
+import { GoogleGenerativeAI } from '@google/generative-ai'
+import { AIPlanningResponse, RemittanceAgent } from '@/types'
+import { resolveRecipient } from '@/services/ens/resolver'
 
-import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
-import { AIPlanningResponse } from "@/types";
-
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || "");
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY || '')
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
 const SYSTEM_PROMPT = `
-You are Pulse AI, the engine for Pulse Remit. Your job is to parse user natural language requests for setting up remittance agents.
-You must identify:
-1. Amount (number)
-2. Recipient ENS (e.g., chidi.ens)
-3. Frequency (once, daily, weekly, monthly)
-4. Source Chain (Ethereum, Base, Optimism, Polygon)
-5. Destination Chain (Ethereum, Base, Optimism, Polygon)
+You are Pulse Agent, an expert AI remittance planner.
+Your goal is to parse user intents into structured remittance plans.
 
-If information is missing, use sensible defaults (Frequency: weekly, Source: Base, Dest: Optimism).
-Response MUST be in JSON.
-`;
+Users will ask things like:
+- "Send $50 to mom.eth every week from Base"
+- "Bridge 100 USDC from Eth to Op for tuition"
+- "Create a family channel for my sister"
 
-export const parseRemittanceRequest = async (prompt: string): Promise<AIPlanningResponse | null> => {
+Extract the following JSON structure:
+{
+  "sourceChain": "string (e.g. Base, Ethereum, Optimism, Arbitrum)",
+  "destChain": "string (e.g. Base, Ethereum, Optimism, Arbitrum)",
+  "amount": "number",
+  "token": "string (default: USDC)",
+  "frequency": "string (one-time, daily, weekly, monthly)",
+  "recipient": "string (ENS or address)",
+  "type": "string (direct, bridge, channel)"
+}
+
+Rules:
+1. Default to "USDC" if token not specified.
+2. Default to "Base" if source chain not specified.
+3. Default to "one-time" if frequency not specified.
+4. If source == dest, type is "direct".
+5. If source != dest, type is "bridge".
+6. If frequency != "one-time", type is "channel" (Yellow Network).
+7. Return ONLY the JSON object, no markdown.
+`
+
+export async function parseRemittanceRequest(prompt: string): Promise<AIPlanningResponse | null> {
     try {
-        const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
-            systemInstruction: SYSTEM_PROMPT
-        });
+        const result = await model.generateContent([
+            { text: SYSTEM_PROMPT },
+            { text: `User Request: "${prompt}"` }
+        ])
 
-        const result = await model.generateContent({
-            contents: [{ role: "user", parts: [{ text: prompt }] }],
-            generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: {
-                    type: SchemaType.OBJECT,
-                    properties: {
-                        name: { type: SchemaType.STRING, description: "A friendly name for the agent" },
-                        amount: { type: SchemaType.NUMBER },
-                        recipient: { type: SchemaType.STRING },
-                        frequency: {
-                            type: SchemaType.STRING,
-                            enum: ["once", "daily", "weekly", "monthly"],
-                            format: "enum"
-                        },
-                        sourceChain: { type: SchemaType.STRING },
-                        destChain: { type: SchemaType.STRING },
-                        actionRequired: { type: SchemaType.STRING, description: "Brief summary of what will happen" }
-                    },
-                    required: ["name", "amount", "recipient", "frequency", "sourceChain", "destChain", "actionRequired"]
-                }
-            }
-        });
+        const response = await result.response
+        const text = response.text()
 
-        const text = result.response.text();
-        if (!text) return null;
-        return JSON.parse(text) as AIPlanningResponse;
+        // Clean up potential markdown formatting
+        const jsonStr = text.replace(/```json/g, '').replace(/```/g, '').trim()
+        const plan = JSON.parse(jsonStr)
+
+        // Enhance with ENS resolution if possible (simulated or real)
+        // In a real agent, we might do a tool call here
+        // For now we just return the plan and let the frontend validate
+
+        return {
+            sourceChain: plan.sourceChain,
+            destChain: plan.destChain,
+            amount: plan.amount,
+            token: plan.token,
+            frequency: plan.frequency,
+            recipient: plan.recipient,
+            // Map the type field if needed or handle logic in component
+        }
+
     } catch (error) {
-        console.error("Gemini Error:", error);
-        return null;
+        console.error('Gemini parsing error:', error)
+        return null
     }
-};
+}
+
+export async function enhancePlanWithEns(plan: AIPlanningResponse) {
+    const { address, ensName, isValid } = await resolveRecipient(plan.recipient)
+
+    if (isValid && address) {
+        return {
+            ...plan,
+            recipientAddress: address,
+            recipientEns: ensName || plan.recipient
+        }
+    }
+    return plan
+}

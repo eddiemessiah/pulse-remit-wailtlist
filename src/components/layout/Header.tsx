@@ -10,11 +10,11 @@ export const Header = () => {
         <header className="h-16 lg:h-20 border-b border-white/5 bg-[#050505]/80 backdrop-blur-xl sticky top-0 z-40 px-4 md:px-8 flex items-center justify-between">
             <div className="flex items-center gap-4 flex-1">
                 <div className="hidden md:block relative group w-96">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-[#00FF88] transition-colors" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-[#CAFF33] transition-colors" />
                     <input
                         type="text"
                         placeholder="Search agents, transactions, or recipients..."
-                        className="w-full bg-white/5 border border-white/5 rounded-full py-2.5 px-12 text-sm focus:outline-none focus:border-[#00FF88]/50 transition-all focus:bg-white/[0.08]"
+                        className="w-full bg-white/5 border border-white/5 rounded-full py-2.5 px-12 text-sm focus:outline-none focus:border-[#CAFF33]/50 transition-all focus:bg-white/[0.08]"
                     />
                 </div>
             </div>
@@ -96,7 +96,7 @@ export const Header = () => {
                                                 <div className="text-right hidden sm:block">
                                                     <p className="text-[10px] font-mono font-bold text-white leading-none">{account.displayName}</p>
                                                 </div>
-                                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-[#00FF88] to-[#0061FF] border border-white/20" />
+                                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-[#CAFF33] to-[#0061FF] border border-white/20" />
                                             </button>
                                         </div>
                                     );

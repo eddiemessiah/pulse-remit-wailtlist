@@ -33,7 +33,7 @@ export default function GlobalFlowsPage() {
                     <p className="text-gray-500 mt-1">Live tracking of agentic wealth movements across borders.</p>
                 </div>
                 <div className="flex items-center gap-3 bg-white/5 p-1 rounded-2xl border border-white/10">
-                    <button className="px-4 py-2 bg-[#00FF88] text-black font-bold rounded-xl text-xs transition-all">Live Network</button>
+                    <button className="px-4 py-2 bg-[#CAFF33] text-black font-bold rounded-xl text-xs transition-all">Live Network</button>
                     <button className="px-4 py-2 text-gray-500 font-bold rounded-xl text-xs hover:text-white transition-all">Historical Radar</button>
                 </div>
             </div>
@@ -42,7 +42,7 @@ export default function GlobalFlowsPage() {
             <div className="relative aspect-[21/9] w-full pulse-card overflow-hidden group">
                 {/* Simulated Map Background */}
                 <div className="absolute inset-0 bg-[#0A0A0A]">
-                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#00FF88 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+                    <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#CAFF33 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
                     {/* Pulsing Nodes */}
                     {[
@@ -59,8 +59,8 @@ export default function GlobalFlowsPage() {
                             animate={{ scale: [1, 1.2, 1] }}
                             transition={{ duration: 4, repeat: Infinity, delay: i * 0.8 }}
                         >
-                            <div className="w-4 h-4 rounded-full bg-[#00FF88] shadow-[0_0_20px_#00FF88] relative">
-                                <div className="absolute inset-0 rounded-full bg-[#00FF88] animate-ping" />
+                            <div className="w-4 h-4 rounded-full bg-[#CAFF33] shadow-[0_0_20px_#CAFF33] relative">
+                                <div className="absolute inset-0 rounded-full bg-[#CAFF33] animate-ping" />
                             </div>
                             <span className="text-[10px] font-bold text-white mt-1 uppercase tracking-widest">{node.label}</span>
                         </motion.div>
@@ -71,7 +71,7 @@ export default function GlobalFlowsPage() {
                         <motion.path
                             d="M 20% 30% Q 35% 10% 50% 25%"
                             fill="none"
-                            stroke="#00FF88"
+                            stroke="#CAFF33"
                             strokeWidth="1"
                             strokeDasharray="5,5"
                         />
@@ -99,7 +99,7 @@ export default function GlobalFlowsPage() {
                         <div className="flex items-center gap-4">
                             <div className="p-3 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-xl">
                                 <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Active Nodes</p>
-                                <p className="text-2xl font-bold">1,240 <span className="text-[#00FF88] text-xs">+12</span></p>
+                                <p className="text-2xl font-bold">1,240 <span className="text-[#CAFF33] text-xs">+12</span></p>
                             </div>
                             <div className="p-3 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-xl">
                                 <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Live Volume</p>
@@ -173,12 +173,12 @@ export default function GlobalFlowsPage() {
                         </p>
                         <button className="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-bold text-sm hover:bg-white/10 transition-all flex items-center justify-center gap-2">
                             Review Deployment Data
-                            <ArrowRight className="w-4 h-4 text-[#00FF88]" />
+                            <ArrowRight className="w-4 h-4 text-[#CAFF33]" />
                         </button>
                     </div>
 
                     <div className="p-8 pulse-card">
-                        <Activity className="w-10 h-10 text-[#00FF88] mb-6" />
+                        <Activity className="w-10 h-10 text-[#CAFF33] mb-6" />
                         <h3 className="text-xl font-bold mb-3">Health Status</h3>
                         <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-4">Network Integrity</p>
                         <div className="space-y-3">

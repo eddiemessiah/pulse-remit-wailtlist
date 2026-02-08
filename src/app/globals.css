@@ -27,7 +27,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --color-pulse-green: #00FF88;
+  --color-pulse-green: #CAFF33;
   --color-pulse-blue: #0061FF;
   --color-pulse-orange: #FF6B00;
   --color-wise-green: #25d366;
@@ -100,7 +100,7 @@
 }
 
 .pulse-gradient {
-  background: linear-gradient(135deg, #00FF88 0%, #0061FF 100%);
+  background: linear-gradient(135deg, #CAFF33 0%, #0061FF 100%);
 }
 
 .wise-button {

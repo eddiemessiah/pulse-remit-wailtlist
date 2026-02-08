@@ -28,7 +28,7 @@ export default function SettingsPage() {
                 {/* Profile Card */}
                 <div className="pulse-card p-8">
                     <div className="flex items-center gap-6">
-                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#00FF88] to-[#0061FF] flex items-center justify-center border-2 border-white/20 relative">
+                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#CAFF33] to-[#0061FF] flex items-center justify-center border-2 border-white/20 relative">
                             <User className="w-10 h-10 text-white" />
                             <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-lg bg-emerald-500 border-2 border-[#141414] flex items-center justify-center">
                                 <CheckCircle2 className="w-3 h-3 text-white" />
@@ -36,7 +36,7 @@ export default function SettingsPage() {
                         </div>
                         <div className="flex-1">
                             <h2 className="text-2xl font-bold">Pulse User #71C</h2>
-                            <p className="text-[#00FF88] font-mono font-bold text-sm">pulse.ens</p>
+                            <p className="text-[#CAFF33] font-mono font-bold text-sm">pulse.ens</p>
                             <div className="flex items-center gap-4 mt-3">
                                 <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 text-[10px] text-gray-400 font-bold uppercase border border-white/5">
                                     <Wallet className="w-3 h-3" />

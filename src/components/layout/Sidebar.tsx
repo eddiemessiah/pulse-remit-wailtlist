@@ -45,7 +45,7 @@ export const Sidebar = () => {
         <div className="flex flex-col h-full">
             <PulseLogo className="mb-12" />
 
-            <button className="w-full py-4 mb-8 bg-[#00FF88] text-black font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-[#00D16F] transition-all transform hover:scale-[1.02] shadow-[0_0_20px_rgba(0,255,136,0.2)]">
+            <button className="w-full py-4 mb-8 bg-[#CAFF33] text-black font-bold rounded-2xl flex items-center justify-center gap-2 hover:bg-[#b8e62e] transition-all transform hover:scale-[1.02] shadow-[0_0_20px_rgba(202,255,51,0.2)]">
                 <Plus className="w-5 h-5" />
                 New Agent
             </button>
@@ -59,17 +59,17 @@ export const Sidebar = () => {
                         className={cn(
                             "flex items-center gap-3 px-4 py-3 rounded-xl transition-all group relative overflow-hidden",
                             pathname === item.href
-                                ? "bg-white/5 text-[#00FF88]"
+                                ? "bg-white/5 text-[#CAFF33]"
                                 : "text-gray-400 hover:text-white hover:bg-white/[0.02]"
                         )}
                     >
                         {pathname === item.href && (
                             <motion.div
                                 layoutId="sidebar-active"
-                                className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1/2 bg-[#00FF88] rounded-r-full"
+                                className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1/2 bg-[#CAFF33] rounded-r-full"
                             />
                         )}
-                        <item.icon className={cn("w-5 h-5", pathname === item.href ? "text-[#00FF88]" : "group-hover:scale-110 transition-transform")} />
+                        <item.icon className={cn("w-5 h-5", pathname === item.href ? "text-[#CAFF33]" : "group-hover:scale-110 transition-transform")} />
                         <span className="font-bold text-sm tracking-tight">{item.label}</span>
                     </Link>
                 ))}
@@ -84,7 +84,7 @@ export const Sidebar = () => {
                         className={cn(
                             "flex items-center gap-3 px-4 py-3 rounded-xl transition-all group",
                             pathname === item.href
-                                ? "bg-white/5 text-[#00FF88]"
+                                ? "bg-white/5 text-[#CAFF33]"
                                 : "text-gray-400 hover:text-white hover:bg-white/[0.02]"
                         )}
                     >
@@ -97,7 +97,7 @@ export const Sidebar = () => {
                     <p className="text-xs font-bold text-white mb-1">Elite Status</p>
                     <p className="text-[10px] text-gray-500 font-bold mb-3 leading-tight uppercase tracking-widest">Fee Savings: $840</p>
                     <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-                        <div className="w-3/4 h-full bg-[#00FF88] shadow-[0_0_10px_#00FF88]" />
+                        <div className="w-3/4 h-full bg-[#CAFF33] shadow-[0_0_10px_#CAFF33]" />
                     </div>
                 </div>
             </div>

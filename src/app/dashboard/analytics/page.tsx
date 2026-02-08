@@ -39,7 +39,7 @@ const flowData = [
 ]
 
 const chainShare = [
-    { name: 'Base', value: 45, color: '#00FF88' },
+    { name: 'Base', value: 45, color: '#CAFF33' },
     { name: 'Optimism', value: 25, color: '#FF0420' },
     { name: 'Polygon', value: 20, color: '#8247E5' },
     { name: 'Ethereum', value: 10, color: '#627EEA' },
@@ -59,7 +59,7 @@ export default function AnalyticsPage() {
                         <Calendar className="w-4 h-4 text-gray-500" />
                         Last 30 Days
                     </button>
-                    <button className="px-4 py-2 bg-[#00FF88] text-black rounded-xl text-xs font-bold hover:bg-[#00D16F] transition-all">
+                    <button className="px-4 py-2 bg-[#CAFF33] text-black rounded-xl text-xs font-bold hover:bg-[#b8e62e] transition-all">
                         Export Report
                     </button>
                 </div>
@@ -109,7 +109,7 @@ export default function AnalyticsPage() {
                         </div>
                         <div className="flex gap-4">
                             <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full bg-[#00FF88]" />
+                                <div className="w-3 h-3 rounded-full bg-[#CAFF33]" />
                                 <span className="text-xs text-gray-500">Volume</span>
                             </div>
                             <div className="flex items-center gap-2">
@@ -124,8 +124,8 @@ export default function AnalyticsPage() {
                             <AreaChart data={flowData}>
                                 <defs>
                                     <linearGradient id="colorVolume" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#00FF88" stopOpacity={0.2} />
-                                        <stop offset="95%" stopColor="#00FF88" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="#CAFF33" stopOpacity={0.2} />
+                                        <stop offset="95%" stopColor="#CAFF33" stopOpacity={0} />
                                     </linearGradient>
                                     <linearGradient id="colorSavings" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor="#0061FF" stopOpacity={0.2} />
@@ -151,7 +151,7 @@ export default function AnalyticsPage() {
                                 <Area
                                     type="monotone"
                                     dataKey="amount"
-                                    stroke="#00FF88"
+                                    stroke="#CAFF33"
                                     strokeWidth={4}
                                     fillOpacity={1}
                                     fill="url(#colorVolume)"
@@ -200,7 +200,7 @@ export default function AnalyticsPage() {
                     <div className="mt-10 p-4 rounded-2xl bg-white/[0.03] border border-white/5">
                         <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 text-center">Efficiency Insight</p>
                         <p className="text-xs text-center leading-relaxed text-gray-300">
-                            Base currently offers the <span className="text-[#00FF88] font-bold">lowest gas fees</span> for your volume. Pulse Agents are routing 45% of traffic here.
+                            Base currently offers the <span className="text-[#CAFF33] font-bold">lowest gas fees</span> for your volume. Pulse Agents are routing 45% of traffic here.
                         </p>
                     </div>
                 </div>
@@ -208,8 +208,8 @@ export default function AnalyticsPage() {
 
             {/* Lower Section: Impact and Corridors */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="p-8 pulse-card bg-gradient-to-br from-[#00FF88]/5 to-transparent">
-                    <ShieldCheck className="w-12 h-12 text-[#00FF88] mb-6" />
+                <div className="p-8 pulse-card bg-gradient-to-br from-[#CAFF33]/5 to-transparent">
+                    <ShieldCheck className="w-12 h-12 text-[#CAFF33] mb-6" />
                     <h3 className="text-xl font-bold mb-4">Volatility Shield Impact</h3>
                     <p className="text-gray-400 text-sm leading-relaxed mb-8">
                         Our hedging engine successfully detected 3 currency devaluation events this month, automatically locking in USD value before market impact.

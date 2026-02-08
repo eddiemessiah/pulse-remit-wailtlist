@@ -26,20 +26,20 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent, onToggleStatus }) =
     return (
         <motion.div
             layout
-            className="pulse-card p-6 group hover:border-[#00FF88]/30 transition-all"
+            className="pulse-card p-6 group hover:border-[#CAFF33]/30 transition-all"
             whileHover={{ y: -5 }}
         >
             <div className="flex justify-between items-start mb-6">
                 <div className="flex gap-4">
                     <div className={cn(
                         "w-12 h-12 rounded-2xl flex items-center justify-center transition-all",
-                        isActive ? "bg-[#00FF88]/10 text-[#00FF88] shadow-[0_0_15px_rgba(0,255,136,0.1)]" : "bg-white/5 text-gray-500"
+                        isActive ? "bg-[#CAFF33]/10 text-[#CAFF33] shadow-[0_0_15px_rgba(202,255,51,0.1)]" : "bg-white/5 text-gray-500"
                     )}>
                         <Bot className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="font-bold text-lg leading-none mb-1 group-hover:text-[#00FF88] transition-colors">{agent.name}</h3>
-                        <p className="text-[10px] uppercase tracking-widest text-[#00FF88] font-bold font-mono">{agent.recipientEns}</p>
+                        <h3 className="font-bold text-lg leading-none mb-1 group-hover:text-[#CAFF33] transition-colors">{agent.name}</h3>
+                        <p className="text-[10px] uppercase tracking-widest text-[#CAFF33] font-bold font-mono">{agent.recipientEns}</p>
                     </div>
                 </div>
                 <div className={cn(
@@ -69,7 +69,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent, onToggleStatus }) =
                     <div className="text-[10px] px-2 py-1 rounded bg-white/5 font-bold">{agent.destChain}</div>
                 </div>
                 {agent.hedgingEnabled && (
-                    <div className="flex items-center gap-1.5 text-[10px] text-[#00FF88] font-bold uppercase">
+                    <div className="flex items-center gap-1.5 text-[10px] text-[#CAFF33] font-bold uppercase">
                         <ShieldCheck className="w-3 h-3" />
                         Hedging On
                     </div>
@@ -81,7 +81,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent, onToggleStatus }) =
                     onClick={() => onToggleStatus(agent.id)}
                     className={cn(
                         "flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all",
-                        isActive ? "bg-white/5 text-gray-300 hover:bg-white/10" : "bg-[#00FF88] text-black hover:bg-[#00D16F]"
+                        isActive ? "bg-white/5 text-gray-300 hover:bg-white/10" : "bg-[#CAFF33] text-black hover:bg-[#b8e62e]"
                     )}
                 >
                     {isActive ? <><Pause className="w-3 h-3" /> Pause</> : <><Play className="w-3 h-3" /> Active</>}

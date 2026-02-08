@@ -1,0 +1,262 @@
+[
+    {
+        "type": "function",
+        "name": "createPlan",
+        "inputs": [
+            {
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "name": "interval",
+                "type": "uint256"
+            },
+            {
+                "name": "ensNode",
+                "type": "bytes32"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "topUpPlan",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            },
+            {
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "executePlan",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            },
+            {
+                "name": "target",
+                "type": "address"
+            },
+            {
+                "name": "bridgeData",
+                "type": "bytes"
+            },
+            {
+                "name": "feesSaved",
+                "type": "uint256"
+            },
+            {
+                "name": "secondaryAgent",
+                "type": "address"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "pausePlan",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "resumePlan",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "cancelPlan",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "approvePlan",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "plans",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "name": "balance",
+                "type": "uint256"
+            },
+            {
+                "name": "interval",
+                "type": "uint256"
+            },
+            {
+                "name": "lastPaid",
+                "type": "uint256"
+            },
+            {
+                "name": "status",
+                "type": "uint8"
+            },
+            {
+                "name": "ensNode",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
+        "type": "function",
+        "name": "nextPlanId",
+        "inputs": [],
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
+        "type": "function",
+        "name": "totalVolumeProtected",
+        "inputs": [],
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
+        "type": "function",
+        "name": "totalFeesSaved",
+        "inputs": [],
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
+        "type": "event",
+        "name": "PlanCreated",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256",
+                "indexed": true
+            },
+            {
+                "name": "owner",
+                "type": "address",
+                "indexed": true
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "PlanExecuted",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256",
+                "indexed": true
+            },
+            {
+                "name": "amount",
+                "type": "uint256",
+                "indexed": false
+            },
+            {
+                "name": "crossChain",
+                "type": "bool",
+                "indexed": false
+            },
+            {
+                "name": "feesSaved",
+                "type": "uint256",
+                "indexed": false
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "PlanStatusChanged",
+        "inputs": [
+            {
+                "name": "planId",
+                "type": "uint256",
+                "indexed": true
+            },
+            {
+                "name": "newStatus",
+                "type": "uint8",
+                "indexed": false
+            }
+        ]
+    }
+]

@@ -41,11 +41,12 @@ export interface TransactionRecord {
 }
 
 export interface AIPlanningResponse {
-    name: string;
+    name?: string;
     amount: number;
+    token?: string;
     recipient: string;
-    frequency: 'once' | 'daily' | 'weekly' | 'monthly';
+    frequency: 'one-time' | 'once' | 'daily' | 'weekly' | 'monthly';
     sourceChain: string;
     destChain: string;
-    actionRequired: string;
+    actionRequired?: string;
 }

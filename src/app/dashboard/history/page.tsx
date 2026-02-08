@@ -95,13 +95,13 @@ export default function ExecutionHistoryPage() {
             <div className="space-y-4">
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="flex-1 relative group">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-[#00FF88] transition-colors" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-[#CAFF33] transition-colors" />
                         <input
                             type="text"
                             placeholder="Find a specific transaction or recipient..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full bg-white/[0.03] border border-white/5 rounded-2xl py-3.5 px-12 text-sm focus:outline-none focus:border-[#00FF88]/50 transition-all"
+                            className="w-full bg-white/[0.03] border border-white/5 rounded-2xl py-3.5 px-12 text-sm focus:outline-none focus:border-[#CAFF33]/50 transition-all"
                         />
                     </div>
                     <div className="flex gap-2">
@@ -111,7 +111,7 @@ export default function ExecutionHistoryPage() {
                                 onClick={() => setFilter(s)}
                                 className={cn(
                                     "px-4 py-2 rounded-xl border text-[10px] font-bold uppercase tracking-widest transition-all",
-                                    filter === s ? "bg-[#00FF88] border-[#00FF88] text-black" : "bg-white/5 border-white/10 text-gray-500 hover:border-white/20"
+                                    filter === s ? "bg-[#CAFF33] border-[#CAFF33] text-black" : "bg-white/5 border-white/10 text-gray-500 hover:border-white/20"
                                 )}
                             >
                                 {s}
