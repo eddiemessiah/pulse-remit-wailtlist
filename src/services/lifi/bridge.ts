@@ -66,8 +66,8 @@ export class LiFiService {
             const status = await getStatus({
                 txHash,
                 bridge,
-                fromChainId,
-                toChainId
+                fromChain: fromChainId,
+                toChain: toChainId
             })
             return status
         } catch (error) {
@@ -92,7 +92,7 @@ export class LiFiService {
             fromAmount: route.fromAmount,
             toAmount: route.toAmount,
             gasCostUSD: route.gasCostUSD,
-            totalGasCosts: route.totalGasCosts,
+
             steps,
         }
     }
