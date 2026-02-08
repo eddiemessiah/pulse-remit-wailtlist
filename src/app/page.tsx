@@ -25,6 +25,7 @@ import { PulseLogo } from '@/components/shared/PulseLogo'
 import { DashboardPreview } from '@/components/landing/DashboardPreview'
 import { AbstractArrows } from '@/components/landing/AbstractArrows'
 import { ActiveAgentsCard } from '@/components/landing/ActiveAgentsCard'
+import { PoweredBy } from '@/components/landing/PoweredBy'
 
 // Brand Color
 const BRAND_GREEN = '#CAFF33'
@@ -119,14 +120,7 @@ const features = [
   },
 ]
 
-// Partners Data
-const partners = [
-  { name: 'Circle Arc', logo: '◉' },
-  { name: 'LI.FI', logo: '◈' },
-  { name: 'Yellow', logo: '◆' },
-  { name: 'ENS', logo: '◎' },
-  { name: 'Base', logo: '▣' },
-]
+
 
 export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -525,21 +519,7 @@ export default function LandingPage() {
       </section>
 
       {/* Partners Section */}
-      <section className="py-16 px-6 lg:px-12 border-t border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-gray-600 text-sm font-medium mb-10 uppercase tracking-widest">
-            Powered By
-          </p>
-          <div className="flex flex-wrap justify-center gap-12 opacity-50 hover:opacity-100 transition-opacity duration-500">
-            {partners.map((partner, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <span className="text-2xl text-[#CAFF33]">{partner.logo}</span>
-                <span className="text-lg font-bold tracking-tight text-white">{partner.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PoweredBy />
 
       {/* Footer */}
       <footer className="bg-[#0B0B0B] border-t border-[#1A1A1A] pt-16 pb-8 px-6 lg:px-12">

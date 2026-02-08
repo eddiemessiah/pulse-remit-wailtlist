@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <rect x="20" y="10" width="40" height="40" rx="4" fill="#0052FF"/>
+  <text x="80" y="38" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="white">base</text>
+</svg>
