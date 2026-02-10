@@ -13,6 +13,7 @@ Users will ask things like:
 - "Send $50 to mom.eth every week from Base"
 - "Bridge 100 USDC from Eth to Op for tuition"
 - "Create a family channel for my sister"
+- "Deploy a new agent"
 
 Extract the following JSON structure:
 {
@@ -32,7 +33,8 @@ Rules:
 4. If source == dest, type is "direct".
 5. If source != dest, type is "bridge".
 6. If frequency != "one-time", type is "channel" (Yellow Network).
-7. Return ONLY the JSON object, no markdown.
+7. If the user just wants to "deploy agent" or "create agent" without specific details, return a plan with amount: 0, recipient: "self", frequency: "daily" (defaulting to a general agent setup).
+8. Return ONLY the JSON object, no markdown, no backticks.
 `
 
 export async function parseRemittanceRequest(prompt: string): Promise<AIPlanningResponse | null> {

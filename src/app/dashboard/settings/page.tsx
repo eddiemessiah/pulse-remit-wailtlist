@@ -15,8 +15,11 @@ import {
     Fingerprint
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useAccount, useEnsName } from 'wagmi'
 
 export default function SettingsPage() {
+    const { address } = useAccount()
+    const { data: ensName } = useEnsName({ address })
     return (
         <div className="space-y-8 max-w-4xl mx-auto">
             <div>
@@ -35,12 +38,12 @@ export default function SettingsPage() {
                             </div>
                         </div>
                         <div className="flex-1">
-                            <h2 className="text-2xl font-bold">Pulse User #71C</h2>
-                            <p className="text-[#CAFF33] font-mono font-bold text-sm">pulse.ens</p>
+                            <h2 className="text-2xl font-bold">{ensName || 'Pulse User'}</h2>
+                            <p className="text-[#CAFF33] font-mono font-bold text-sm">{ensName || 'No ENS Linked'}</p>
                             <div className="flex items-center gap-4 mt-3">
                                 <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 text-[10px] text-gray-400 font-bold uppercase border border-white/5">
                                     <Wallet className="w-3 h-3" />
-                                    0x71C...4E2
+                                    {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Not Connected'}
                                 </div>
                                 <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-white/5 text-[10px] text-gray-400 font-bold uppercase border border-white/5">
                                     <Shield className="w-3 h-3" />

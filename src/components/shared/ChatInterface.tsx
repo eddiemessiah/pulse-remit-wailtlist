@@ -141,6 +141,17 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ onAgentCreated }) 
                     } : m
                 ))
                 onAgentCreated(plan)
+            } else if (plan.recipient === 'self' && Number(plan.amount) === 0) {
+                // Deploy Agent Flow
+                await new Promise(r => setTimeout(r, 1500))
+                setMessages(prev => prev.map((m, i) =>
+                    i === messageIndex ? {
+                        ...m,
+                        status: 'success',
+                        content: `New Agent successfully deployed on Base Sepolia!`
+                    } : m
+                ))
+                onAgentCreated(plan)
             } else {
                 // Direct Transfer
                 await new Promise(r => setTimeout(r, 1000))

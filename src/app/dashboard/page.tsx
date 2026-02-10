@@ -124,11 +124,24 @@ export default function DashboardPage() {
                                 </div>
 
                                 <div className="relative z-10 flex gap-4 mt-12">
-                                    <button className="flex-1 py-5 bg-white text-black font-black rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-200 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                                    <button
+                                        onClick={() => document.querySelector<HTMLInputElement>('input[type="text"]')?.focus()}
+                                        className="flex-1 py-5 bg-white text-black font-black rounded-2xl flex items-center justify-center gap-2 hover:bg-gray-200 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+                                    >
                                         <Send className="w-5 h-5" />
                                         Send
                                     </button>
-                                    <button className="flex-1 py-5 bg-white/5 border border-white/10 text-white font-black rounded-2xl flex items-center justify-center gap-2 hover:bg-white/10 transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                                    <button
+                                        onClick={() => {
+                                            const chatInput = document.querySelector<HTMLInputElement>('input[type="text"]')
+                                            if (chatInput) {
+                                                chatInput.value = "Deploy a new agent for me"
+                                                chatInput.dispatchEvent(new Event('change', { bubbles: true }))
+                                                chatInput.focus()
+                                            }
+                                        }}
+                                        className="flex-1 py-5 bg-white/5 border border-white/10 text-white font-black rounded-2xl flex items-center justify-center gap-2 hover:bg-white/10 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+                                    >
                                         <Plus className="w-5 h-5" />
                                         Deploy
                                     </button>
@@ -174,44 +187,39 @@ export default function DashboardPage() {
                             </div>
                         </div>
                     )}
-                </div>
-
-                {/* Right Panel: AI Sidekick */}
-                <div className="w-full lg:w-[480px] flex flex-col gap-8">
-                    <div className="bg-[#0A0A0A] rounded-[3rem] border border-white/10 overflow-hidden flex flex-col h-[740px] shadow-2xl">
-                        <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
-                            <div className="flex items-center gap-4">
-                                <div className="relative">
-                                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#CAFF33] to-blue-500 flex items-center justify-center text-black font-black">AI</div>
-                                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-4 border-[#0A0A0A]" />
-                                </div>
-                                <div>
-                                    <span className="font-black text-lg tracking-tight font-display mb-0.5 block italic">PULSE CO-PILOT</span>
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-[10px] font-bold text-[#CAFF33] uppercase tracking-widest">Active</span>
-                                        <span className="w-1 h-1 rounded-full bg-gray-700" />
-                                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">v1.2.4 Alpha</span>
-                                    </div>
+                    <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
+                        <div className="flex items-center gap-4">
+                            <div className="relative">
+                                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#CAFF33] to-blue-500 flex items-center justify-center text-black font-black">AI</div>
+                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-4 border-[#0A0A0A]" />
+                            </div>
+                            <div>
+                                <span className="font-black text-lg tracking-tight font-display mb-0.5 block italic">PULSE CO-PILOT</span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-[10px] font-bold text-[#CAFF33] uppercase tracking-widest">Active</span>
+                                    <span className="w-1 h-1 rounded-full bg-gray-700" />
+                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">v1.2.4 Alpha</span>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex-1 overflow-hidden">
-                            <ChatInterface onAgentCreated={(plan) => console.log(plan)} />
-                        </div>
                     </div>
-
-                    <div className="p-8 rounded-[3rem] bg-gradient-to-br from-indigo-500/10 to-emerald-500/10 border border-white/5 relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-white/[0.01] group-hover:bg-white/[0.03] transition-all" />
-                        <h4 className="font-black italic text-xl font-display mb-4 relative z-10">NETWORK INTELLIGENCE</h4>
-                        <p className="text-sm text-gray-400 font-medium leading-relaxed relative z-10">
-                            Detecting high volatility in NGN/USD pairs. Agents automatically switched hedging strategy to <span className="text-white font-bold">Hard-Peg Stability</span>.
-                        </p>
-                        <button className="w-full py-4 mt-6 bg-white text-black rounded-2xl font-black text-sm hover:bg-gray-200 transition-all relative z-10 transform active:scale-95 shadow-lg">
-                            Review Protection Plan
-                        </button>
+                    <div className="flex-1 overflow-hidden">
+                        <ChatInterface onAgentCreated={(plan) => console.log(plan)} />
                     </div>
                 </div>
+
+                <div className="p-8 rounded-[3rem] bg-gradient-to-br from-indigo-500/10 to-emerald-500/10 border border-white/5 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-white/[0.01] group-hover:bg-white/[0.03] transition-all" />
+                    <h4 className="font-black italic text-xl font-display mb-4 relative z-10">NETWORK INTELLIGENCE</h4>
+                    <p className="text-sm text-gray-400 font-medium leading-relaxed relative z-10">
+                        Detecting high volatility in NGN/USD pairs. Agents automatically switched hedging strategy to <span className="text-white font-bold">Hard-Peg Stability</span>.
+                    </p>
+                    <button className="w-full py-4 mt-6 bg-white text-black rounded-2xl font-black text-sm hover:bg-gray-200 transition-all relative z-10 transform active:scale-95 shadow-lg">
+                        Review Protection Plan
+                    </button>
+                </div>
             </div>
-        </div>
+        </div >
+
     )
 }
