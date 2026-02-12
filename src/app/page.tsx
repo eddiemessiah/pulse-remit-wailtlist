@@ -21,7 +21,7 @@ export default function WaitlistPage() {
   const [claimName, setClaimName] = useState('')
   const [claimed, setClaimed] = useState(false)
 
-  const handleClaim = (e: React.FormEvent) => {
+  const handleClaim = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!claimName) return
     // Use the absolute URL for the API since we are on IPFS/Static Export
