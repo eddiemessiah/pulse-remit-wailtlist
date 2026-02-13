@@ -44,6 +44,11 @@ next-env.d.ts
 # project documentation and planning
 IMPLEMENTATION.md
 DEPLOYMENT.md
+DEPLOY_IPFS.md
+DEPLOY_ROADMAP.md
 ARCHITECTURE.md
 .gemini/
 docs/
+knowledge/
+plan.md
+notes.md

@@ -83,10 +83,9 @@ AI-powered hedging that:
 - **Three.js** (3D Effects)
 - **RainbowKit + Wagmi** (Web3)
 
-### AI/Backend
-- **Google Gemini 1.5 Flash** (NL Processing)
-- **LangGraph** (Agent Orchestration)
-- **FastAPI** (Python Backend)
+### AI/Agent Logic
+- **Google Gemini 1.5 Flash** (NL Processing & Intent Parsing)
+- **Viem + Wagmi** (Agent Execution & On-chain Interactions)
 
 ### Blockchain
 - **Viem** (EVM Interactions)
@@ -103,7 +102,6 @@ AI-powered hedging that:
 - Node.js 20+
 - pnpm or npm
 - Git
-- Python 3.10+ (for backend services when fully integrated)
 
 ### Installation
 
@@ -208,34 +206,25 @@ NEXT_PUBLIC_YELLOW_API_KEY=           # Yellow Network
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         Frontend (Next.js)                       │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐  │
-│  │ Natural Lang│→ │  Gemini AI  │→ │    Agent Dashboard      │  │
-│  │    Input    │  │   Parser    │  │ (Create/Monitor/Execute)│  │
-│  └─────────────┘  └─────────────┘  └─────────────────────────┘  │
-└───────────────────────────┬─────────────────────────────────────┘
-                            │
-                            ▼
+│                         Frontend (Next.js)                      │
+│  ┌─────────────┐      ┌─────────────┐      ┌─────────────────┐  │
+│  │ Natural Lang│ ───> │  Gemini AI  │ ───> │ Agent Dashboard │  │
+│  │    Input    │      │   Parser    │      │ (Approve/Run)   │  │
+│  └─────────────┘      └─────────────┘      └────────┬────────┘  │
+└─────────────────────────────────────────────────────│───────────┘
+                                                      │
+                                                      ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                    Backend (FastAPI + LangGraph)                 │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐  │
-│  │ Remittance  │→ │  Compliance │→ │     Yellow Agent        │  │
-│  │   Agent     │  │    Agent    │  │  (State Channel Mgmt)   │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────────┘  │
-└───────────────────────────┬─────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      Blockchain Layer                            │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐  │
-│  │   LI.FI     │  │   Yellow    │  │     Smart Contracts     │  │
-│  │  Bridging   │  │  Nitrolite  │  │  (Escrow + Settlement)  │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────────┘  │
+│                      Blockchain Layer                           │
+│  ┌─────────────┐      ┌─────────────┐      ┌─────────────────┐  │
+│  │   LI.FI     │      │   Yellow    │      │ Smart Contracts │  │
+│  │  Bridging   │      │  Nitrolite  │      │ (Vault/Registry)│  │
+│  └─────────────┘      └─────────────┘      └─────────────────┘  │
 │                                                                  │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐  │
-│  │ Circle Arc  │  │    ENS      │  │    Base / Optimism      │  │
-│  │    USDC     │  │  Identity   │  │     (L2 Networks)       │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────────┘  │
+│  ┌─────────────┐      ┌─────────────┐      ┌─────────────────┐  │
+│  │ Circle Arc  │      │    ENS      │      │ Base / Optimism │  │
+│  │    USDC     │      │  Identity   │      │  (L2 Networks)  │  │
+│  └─────────────┘      └─────────────┘      └─────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
